@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
 
 const App = () => {
+  // eslint-disable-next-line
   const [notes, setNotes] = useState([
     {
       id: nanoid(),
