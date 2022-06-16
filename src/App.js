@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
 import Search from './components/Search';
+import Header from './components/Header';
 
 const App = () => {
   // eslint-disable-next-line
@@ -25,6 +26,8 @@ const App = () => {
 
   const [searchText, setSearchText] = useState('');
 
+  const [darkMode, setDarkMode] = useState(false);
+
   const addNote = (text) => {
     // console.log(text);
     const date = new Date();
@@ -44,12 +47,15 @@ const App = () => {
 
 
   return (
-    <div className='container'>
-      <Search handleSearchNote={setSearchText}/>
-      <NotesList
-          notes={notes.filter((note)=> note.text.toLowerCase().includes(searchText))}
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote} />
+    <div className={`${darkMode && 'dark-mode'}`}>
+      <div className='container'>
+        <Header handleToggleDarkMode={setDarkMode}/>
+        <Search handleSearchNote={setSearchText}/>
+        <NotesList
+            notes={notes.filter((note)=> note.text.toLowerCase().includes(searchText))}
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote} />
+      </div>
     </div>
   )
 }
